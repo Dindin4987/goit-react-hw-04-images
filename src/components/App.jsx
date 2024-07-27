@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import SearchBar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Button from './Button/Button';
@@ -33,9 +33,20 @@ const App = () => {
   //   ) {
   //     await this.fetchImages();
   //   }
+
+  useEffect(() => {
+    if (searchQuery === '') return;
+    (async () => {
+      await fetchImages(searchQuery, currentPage);
+    })();
+    
+  
+    return () => { };
+  }, [searchQuery, currentPage]);
+  
   
 
-  const fetchImages = async () => {
+  const fetchImages = async (searchQuery, currentPage) => {
     // const { searchQuery, currentPage } = this.state;
 
     // this.setState({ isLoading: true });
@@ -134,7 +145,7 @@ const App = () => {
     // Increment the current page to load more images, unless at the end
     // if (!this.state.isEnd) {
     //   this.setState(prevState => ({ currentPage: prevState.currentPage + 1 }));
-    if (!setIsEnd) {
+    if (setIsEnd) {
       setCurrentPage(prevState => prevState + 1);
     } else {
       alert("You've reached the end of the search results.");
