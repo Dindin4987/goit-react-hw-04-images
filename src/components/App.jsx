@@ -36,7 +36,7 @@ const App = () => {
   
 
   const fetchImages = async () => {
-    // const {  } = this.state;
+    // const { searchQuery, currentPage } = this.state;
 
     // this.setState({ isLoading: true });
     setIsLoading(true);
